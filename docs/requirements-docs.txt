@@ -1,0 +1,14 @@
+sphinx==5.3.0
+sphinx_copybutton==0.5.1
+sphinx-remove-toctrees==0.0.3
+
+wheel==0.38.1
+coverage==7.2.7
+setuptools==67.8.0;python_version>="3.12"
+requests==2.31.0
+
+# Pytest specific deps
+pytest==7.4.0
+pytest-cov==4.1.0
+python-dotenv==1.0.0
+tuspy==0.2.5

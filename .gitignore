@@ -1,0 +1,24 @@
+.DS_Store
+__pycache__/
+
+*.pyc
+*.egg-info
+*.pypirc
+*.log
+*.env
+
+# Common virtualenv names
+env/
+
+# Folder
+dist
+build
+docs/_build
+# diagrams
+
+# Visual Studio used to edit docs
+docs/source/.vs
+
+# README-DEV.md
+
+.pytest_cache

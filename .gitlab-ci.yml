@@ -1,0 +1,37 @@
+variables:
+  PACKAGE_REGISTRY_URL: "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/ranch-sdk-python/"
+
+stages:
+  - package
+
+default:
+  image: python:3.10-alpine3.15
+
+workflow:
+  rules:
+    - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+    - if: $CI_COMMIT_TAG
+
+# --- SDK Documentation generation --- #
+
+generate-doc-python-sdk:
+  stage: package
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+  before_script:
+    - apk add g++ && apk add make
+    - apk add curl
+    - cd docs
+    - pip3 install -r requirements-docs.txt
+    - pip3 install myst-parser
+    - pip3 install furo
+    - pip3 install boto3
+  script:
+    - make html
+  after_script:
+    - |
+      curl -v --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file index.rst ${PACKAGE_REGISTRY_URL}${CI_COMMIT_TAG}"/ranch-sdk-doc-"${CI_COMMIT_TAG}".rst"
+  artifacts:
+    paths:
+      - docs/_build
+    expire_in: 1 day
