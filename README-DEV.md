@@ -75,3 +75,6 @@ twine upload -r test-ranch-pypi dist/*
 - cd ranch-sdk-python
 - nox
 ```
+
+add github user to remote
+git remote set-url origin https://DevMohBakh@github.com/ranchcomputing/python-sdk.git
