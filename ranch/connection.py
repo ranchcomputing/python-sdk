@@ -1,4 +1,4 @@
-"""Module describing a connection."""
+"""Module connection"""
 
 import os
 from ranch.exceptions import RanchException
@@ -15,15 +15,18 @@ SWEB_URL = "https://www.ranchcomputing.com/"
 TIME_OUT = 5  # TODO add time out to the env variable
 
 endpoint_url = "http://172.30.50.19:80"  # TODO replace with DNS server
+# endpoint_url = "https://storage.ranchcomputing.com"
 
 
 class Connect(object):
     def __init__(self, api_key: str) -> None:
-        """_summary_
+        """Connect with the user authentication token (API Key) found in your user
+        dashboard under the settings tab. It is recommended to store this
+        token in environment variables or a configuration file.
+        Your API token is personal and should be securely kept.
 
 
-
-        :param api_key: _description_
+        :param api_key:  Personal API Key.
         :type api_key: str
         """
         self.api_key = api_key.strip()
@@ -40,23 +43,23 @@ class Connect(object):
 
     @property
     def _api_key(self) -> str:
-        """_summary_
+        """Get personal API Key
 
 
-
-        :return: _description_
+        :return: API Key
         :rtype: str
         """
         return self.api_key
 
     def get_prioritys(self, farm: str = "cpu") -> dict:
-        """_summary_
+        """Retrieve the list of priorities utilized in the farm.
+        The farm type may vary, depending on whether the renderer
+        used in the scene is CPU-base or GPU-base.
 
 
-
-        :param farm: _description_, defaults to "cpu"
+        :param farm: The name of the farm, defaults to "cpu"
         :type farm: str, optional
-        :return: _description_
+        :return: List of priorities within the specified farm
         :rtype: dict
         """
         url = f"api/ranchtools/farms/{farm}.json"
@@ -64,11 +67,10 @@ class Connect(object):
 
     @property
     def get_cpu_rendering_occupation(self) -> int:
-        """_summary_
+        """Retrieve the number of jobs currently running on the CPU-based farm.
 
 
-
-        :return: _description_
+        :return: Number of jobs in the rendering state
         :rtype: int
         """
         response = self.get_prioritys("cpu")
@@ -77,9 +79,8 @@ class Connect(object):
     @property
     def get_cpu_queued_occupation(self) -> int:
         """_summary_
-
-
-
+        
+        
         :return: _description_
         :rtype: int
         """
@@ -87,13 +88,12 @@ class Connect(object):
         return response.get("occupation")["queued"]
 
     def get_priority(self, priority: str = "cpu-low") -> int:
-        """_summary_
-
-
-
-        :param priority: _description_, defaults to "cpu-low"
+        """Retrieve the ID associated with the given priority.
+        
+        
+        :param priority: The name of priority, defaults to "cpu-low"
         :type priority: str, optional
-        :return: _description_
+        :return: The ID
         :rtype: int
         """
         # TODO add check for priority string if farm existes
@@ -106,17 +106,16 @@ class Connect(object):
         return 1  # TODO handle priorty error
 
     def get_renderer_id(self, software: str, software_version: str, renderer_name: str) -> int:
-        """_summary_
-
-
-
-        :param software: _description_
+        """Retrieve the ID of the renderer used with a given software version.
+        
+        
+        :param software: The name of the software used
         :type software: str
-        :param software_version: _description_
+        :param software_version: The version of the software
         :type software_version: str
-        :param renderer_name: _description_
+        :param renderer_name: The name of the renderer
         :type renderer_name: str
-        :return: _description_
+        :return: The renderer ID
         :rtype: int
         """
         url = f"api/ranchtools/ranchecker/{software}.json"
@@ -132,12 +131,11 @@ class Connect(object):
 
     @property
     def get_email(self) -> str:
-        """_summary_
-
-
-
-        :return: _description_
-        :rtype: dict
+        """Retrieve the email address of the user currently logged in with the provided API key.
+        
+        
+        :return: Email address
+        :rtype: str
         """
         url = "api/projects/downloadable?secure"  # TODO get url from endpoint
         response = self._get(url=url)
@@ -149,21 +147,21 @@ class Connect(object):
 
     @_api_key.setter
     def _api_key(self, api_key: str) -> None:
-        """_summary_
-
-
-
-        :param api_key: _description_
+        """Set the user API key in the connection
+        
+        
+        :param api_key: User API key
         :type api_key: str
         """
         self.api_key = api_key.strip()
 
     def _set_header(self, api_key: str) -> dict:
-        """_summary_
+        """Set header
 
 
-
-        :return: _description_
+        :param api_key: User API key
+        :type api_key: str
+        :return: header
         :rtype: dict
         """
         headers = {"x-auth-token": api_key, "Content-type": "application/json", "Accept": "application/json"}
@@ -178,23 +176,22 @@ class Connect(object):
         software_version: str,
         renderer_name: str,
     ):
-        """_summary_
+        """Create a new job in the user account
+        
 
-
-
-        :param archive_path: _description_
+        :param archive_path: Destination for the archive prepared by Ranchecker.
         :type archive_path: str
-        :param job_name: _description_
+        :param job_name: Name of new created job
         :type job_name: str
-        :param priority: _description_
+        :param priority: The priority name
         :type priority: str
-        :param software: _description_
+        :param software: Software name
         :type software: str
-        :param software_version: _description_
+        :param software_version: Software version
         :type software_version: str
-        :param renderer_name: _description_
+        :param renderer_name: Renderer name
         :type renderer_name: str
-        :return: _description_
+        :return: Job
         :rtype: _type_
         """
         job_renderer_id = self.get_renderer_id(software, software_version, renderer_name)
@@ -204,8 +201,6 @@ class Connect(object):
     # @retry
     def _post(self, url: str, data: dict = {}) -> dict:
         """_summary_
-
-
 
         :param url: _description_
         :type url: str
@@ -224,8 +219,6 @@ class Connect(object):
     def _get(self, url: str, data: dict = {}) -> dict:
         """_summary_
 
-
-
         :param url: _description_
         :type url: str
         :param data: _description_
@@ -242,9 +235,7 @@ class Connect(object):
 
     def submit(self, job: Job) -> bool:
         """_summary_
-
-
-
+        
         :param job: _description_
         :type job: Job
         :return: _description_
@@ -279,9 +270,7 @@ class Connect(object):
 
     def buckets(self) -> list:
         """_summary_
-
-
-
+        
         :return: _description_
         :rtype: list
         """
