@@ -38,7 +38,7 @@ class TestConnection:
     # def test_connection_unauthorize_message(self, data):
     #     self.conn._api_key = "key"
     #     archive_path = "C:\\Users\\mohbakh\\Pictures\\car\\sdk.vuc"
-    #     res = self.conn.creat_job(
+    #     res = self.conn.create_job(
     #         archive_path=archive_path, job_name="sdk_job", priority="gpu-low", renderer_id=598
     #     ).create()
     #     assert res.json() == {"message": "wrong X-Auth-Token"}
@@ -46,14 +46,14 @@ class TestConnection:
     # def test_connection_unauthorize_status(self, data):
     #     archive_path = "C:\\Users\\mohbakh\\Pictures\\car\\sdk.vuc"
     #     self.conn._api_key = "key"
-    #     res = self.conn.creat_job(
+    #     res = self.conn.create_job(
     #         archive_path=archive_path, job_name="sdk_job", priority="gpu-low", renderer_id=598
     #     ).create()
     #     assert res.status_code == 401
 
     def test_create_job(self):
         archive_path = "C:\\Users\\mohbakh\\Pictures\\car\\sdk.vuc"
-        job = self.conn.creat_job(
+        job = self.conn.create_job(
             archive_path=archive_path,
             job_name="sdk_job2",
             priority="cpu-low",
@@ -65,7 +65,7 @@ class TestConnection:
 
     def test_submit_job(self):
         archive_path = "C:\\Users\\mohbakh\\Pictures\\car\\sdk.vuc"
-        job = self.conn.creat_job(
+        job = self.conn.create_job(
             archive_path=archive_path,
             job_name="sdk_job",
             priority="cpu-low",

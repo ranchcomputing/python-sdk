@@ -22,7 +22,7 @@ vuc_archive_path = ranch_rc.create_archive(software_commandline=c4d_commandline,
             g_licenseUsername=Username, 
             g_licensePassword=Password, 
             scene_destination=scene)
-job = self.conn.creat_job(
+job = self.conn.create_job(
             archive_path=vuc_archive_path,
             job_name="sdk_job",
             priority="cpu-low",
