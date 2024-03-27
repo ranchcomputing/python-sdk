@@ -9,16 +9,11 @@ from .mock_connection import MockConnection
 
 # from .mock_job import data
 
-# renderer id
-# https://www.ranchcomputing.com/api/ranchtools/ranchecker/cinema4d.json
-# priority
-# "cpu": "https://www.ranchcomputing.com/api/ranchtools/farms/cpu.json",
-# "gpu": "https://www.ranchcomputing.com/api/ranchtools/farms/gpu.json"
 
 load_dotenv()
 
 RANCH_API_KEY = os.getenv("RANCH_API_KEY")
-
+RANCH_SDK_EMAIL = os.getenv("RANCH_SDK_EMAIL")
 
 class TestConnection:
     def setup_method(self, method):
@@ -86,11 +81,11 @@ class TestConnection:
 
     def test_get_email(self):
         res = self.conn.get_email
-        assert res == "mohamed.bakhouche@ranchcomputing.com"
+        assert res == RANCH_SDK_EMAIL
 
     def test_get_user_buckets(self):
         buckets = self.conn.buckets()
-        assert buckets["Buckets"][0]["Name"] == "mohamed.bakhouche.ranchcomputing.com"
+        assert buckets["Buckets"][0]["Name"] == RANCH_SDK_EMAIL
 
     def test_get_rendering_occupation(self):
         rendering_occupation = self.mock_conn.get_cpu_rendering_occupation
