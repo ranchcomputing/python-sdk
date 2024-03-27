@@ -14,15 +14,15 @@ class Job(object):
 
 
 
-        :param connection: _description_
-        :type connection: _type_
-        :param archive_path: _description_
+        :param connection: The user connection
+        :type connection: Connection(:class:`~ranch.connection.Connect)
+        :param archive_path: Destination for the archive prepared by Ranchecker.
         :type archive_path: str
-        :param job_name: _description_
+        :param job_name: Name of new created job
         :type job_name: str
-        :param priority: _description_
+        :param priority: The priority
         :type priority: str
-        :param renderer_id: _description_
+        :param renderer_id: The renderer ID
         :type renderer_id: int
         """
         self._connection = connection
@@ -32,41 +32,41 @@ class Job(object):
         self.renderer_id = renderer_id
         self._data = {}
 
-    def set_email(self, email):
+    def set_email(self, email: str) -> str:
         """_summary_
 
 
 
         :param email: _description_
-        :type email: _type_
+        :type email: str
         :return: _description_
-        :rtype: _type_
+        :rtype: str
         """
         self._data["email"] = email
         return email
 
-    def set_priority(self, priority):
+    def set_priority(self, priority: str) -> int:
         """_summary_
 
 
 
         :param priority: _description_
-        :type priority: _type_
+        :type priority: str
         :return: _description_
-        :rtype: _type_
+        :rtype: int
         """
         self._data["priority_id"] = priority
         return priority
 
-    def set_renderer_id(self, renderer_id):
+    def set_renderer_id(self, renderer_id: str) -> int:
         """_summary_
-
-
-
+        
+        
+        
         :param renderer_id: _description_
-        :type renderer_id: _type_
+        :type renderer_id: str
         :return: _description_
-        :rtype: _type_
+        :rtype: int
         """
         self._data["renderer_id"] = renderer_id
         return renderer_id
@@ -86,24 +86,24 @@ class Job(object):
         return specific_frames
 
     @property
-    def get_job_name(self):
+    def get_job_name(self) -> str:
         """_summary_
-
-
-
+        
+        
+        
         :return: _description_
-        :rtype: _type_
+        :rtype: str
         """
         return self.job_name
 
     @property
-    def get_archive_path(self):
+    def get_archive_path(self) -> str:
         """_summary_
 
 
 
         :return: _description_
-        :rtype: _type_
+        :rtype: str
         """
         return self.archive_path
 

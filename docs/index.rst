@@ -1,25 +1,32 @@
-.. dddddd documentation master file, created by
-   sphinx-quickstart on Wed Nov  8 18:23:48 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
 
-Welcome to documentation!
-==================================
+RANCH SDK documentation
+====================
 
-Reference
----------
+You use the RANCH SDK for Python (ranch-sdk) to create, and manage your jobs in or render farm.
 
-.. toctree::
-   :maxdepth: 2
-      guide/usage.md
+.. note::
+
+    Documentation and developers tend to refer to the RANCH SDK for Python as "ranch-sdk," and this
+    documentation often does so as well.
 
 Quickstart
 ----------
+
 .. toctree::
    :maxdepth: 2
-      guide/quickstart.md 
-      guide/installation.md 
-      guide/examples.md
+
+   guide/quickstart
+   guide/examples
+   guide/installation
+   guide/usage
+
+User guides
+-----------
+
+.. toctree::
+   :maxdepth: 3
+
+   guide/index
 
 
 Indices and tables
@@ -27,3 +34,4 @@ Indices and tables
 
 * :ref:`genindex`
 * :ref:`modindex`
+* :ref:`search`

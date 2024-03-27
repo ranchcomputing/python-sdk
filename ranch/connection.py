@@ -14,7 +14,7 @@ from requests.adapters import HTTPAdapter
 SWEB_URL = "https://www.ranchcomputing.com/"
 TIME_OUT = 5  # TODO add time out to the env variable
 
-endpoint_url = "http://172.30.50.19:80"  # TODO replace with DNS server
+endpoint_url = "http://10.0.0.1:80"  # TODO replace with DNS server
 # endpoint_url = "https://storage.ranchcomputing.com"
 
 
