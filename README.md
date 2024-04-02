@@ -54,3 +54,24 @@ res = self.conn.submit(job)
       api --> sweb(Sweb);
       sweb --> renderFarm(Ranch Render farm);
 ```
+
+
+# Bucket
+
+```mermaid
+  graph TD;
+      client{Client} --> client-rclone
+      client{Client} --> ranchsync
+      client{Client} --> ranchsdk
+      client{Client} --> boto3
+      client-rclone(Rclone) --> bucket(Bucket);
+      ranchsync(Ranchsync) --> bucket;
+      ranchsdk(Ranch sdk) --> bucket;
+      boto3(Boto3) --> bucket;
+      
+      node-rclone(RClone) <--> node(Node);
+      bucket <--> node-rclone;
+
+      scalc-rclone(RClone) <--> scalc(Scalc);
+      bucket <--> scalc-rclone ;
+```
