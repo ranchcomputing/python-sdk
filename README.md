@@ -3,7 +3,7 @@ This Python-based API SDK Designed with future production in mind, its goal is t
 
 ### Example python script
 
-Here is a little sample script with python submit a job to the ranchcomputing render farm with cinema 4d R23 and Arnold renderer 
+Here is a little simple script with python submit a job to the ranchcomputing render farm with cinema 4d R23 and Arnold renderer 
 
 ```python
 import os
@@ -13,7 +13,8 @@ from ranch import ranchecker
 RANCH_API_KEY = os.getenv("RANCH_API_KEY")
 Username = os.environ.get("g_licenseUsername")
 Password = os.environ.get("g_licensePassword")
-scene = "C:\\Users\\mohbakh\\Pictures\\car\\sdk.c4d"
+# Replace the scene variable with the destination of your scene.
+scene = "C:\\Users\\username\\jobs\\cinema4d\\sdk.c4d"
 c4d_commandline = "C:\\Maxon\\C4D2023\\Commandline.exe"
 
 conn = Connect(RANCH_API_KEY)
@@ -22,7 +23,7 @@ vuc_archive_path = ranch_rc.create_archive(software_commandline=c4d_commandline,
             g_licenseUsername=Username, 
             g_licensePassword=Password, 
             scene_destination=scene)
-job = self.conn.create_job(
+job = conn.create_job(
             archive_path=vuc_archive_path,
             job_name="sdk_job",
             priority="cpu-low",
@@ -30,7 +31,7 @@ job = self.conn.create_job(
             software_version="R23",
             renderer_name="Arnold",
         )
-res = self.conn.submit(job)
+res = conn.submit(job)
 
 ```
 
@@ -40,7 +41,7 @@ res = self.conn.submit(job)
   graph TD;
       client{Client} --> ranchSdk(Ranch SDK);
       ranchSdk --> createArchive(Create archive);
-      ranchSdk --> download(Downlaod);
+      ranchSdk --> download(Download);
       createArchive --> ranchecker(RANCHecker);
       ranchSdk --> createBucket(Create buckets);
       createBucket --> uploadAssets(Upload assets);
