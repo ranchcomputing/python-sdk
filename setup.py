@@ -5,7 +5,7 @@ from ranch.__version__ import __version__
 requires = ["requests", "bson", "pytest", "twine", "wheel"]
 
 setup(
-    name="moscaro-sdk-python",
+    name="ranch-sdk",
     version=__version__,
     description="ranchcomputing SDK",
     long_description=open("README.md").read(),
