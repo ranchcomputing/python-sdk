@@ -10,12 +10,10 @@ Here is a little simple script with python submit a job to the ranchcomputing re
 ```python
 import os
 from ranch.connection import Connect
-from ranch import ranchecker
 
 RANCH_API_KEY = os.getenv("RANCH_API_KEY")
 
 conn = Connect(RANCH_API_KEY)
-ranch_rc = ranchecker.Ranchecker()
 
 job = conn.create_job(
             archive_path="C:\\Users\\sdk_job.vu3",
