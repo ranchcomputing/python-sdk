@@ -75,3 +75,45 @@ twine upload -r test-ranch-pypi dist/*
 - cd ranch-sdk-python
 - nox
 ```
+
+### Ranch SDK workflow
+
+```mermaid
+  graph TD;
+      client{Client} --> ranchSdk(Ranch SDK);
+      ranchSdk --> createArchive(Create archive);
+      ranchSdk --> download(Download);
+      createArchive --> ranchecker(RANCHecker);
+      ranchSdk --> createBucket(Create buckets);
+      createBucket --> uploadAssets(Upload assets);
+      uploadAssets --> api;
+      ranchecker --> submitJob(Submit job);
+      download --> finishedJob(Finished job);
+      finishedJob --> api(API);
+      submitJob --> api(API);
+      ranchSdk --> userInfo(User infos);
+      userInfo --> api(API);
+      api --> sweb(Sweb);
+      sweb --> renderFarm(Ranch Render farm);
+```
+
+
+# Bucket
+
+```mermaid
+  graph TD;
+      client{Client} --> client-rclone
+      client{Client} --> ranchsync
+      client{Client} --> ranchsdk
+      client{Client} --> boto3
+      client-rclone(Rclone) --> bucket(Bucket);
+      ranchsync(Ranchsync) --> bucket;
+      ranchsdk(Ranch sdk) --> bucket;
+      boto3(Boto3) --> bucket;
+      
+      node-rclone(RClone) <--> node(Node);
+      bucket <--> node-rclone;
+
+      scalc-rclone(RClone) <--> scalc(Scalc);
+      bucket <--> scalc-rclone ;
+```

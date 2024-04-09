@@ -1,6 +1,6 @@
 wheel==0.38.1
 coverage==7.2.7
-setuptools==67.8.0;python_version>="3.12"
+setuptools==40.8.0;python_version>="3.12"
 requests==2.31.0
 
 # Pytest specific deps
