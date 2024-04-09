@@ -58,6 +58,31 @@ class TestConnection:
         ).create()
         assert job.status_code == 200
 
+    def test_create_3dsmax_job(self):
+        archive_path = "C:\\Users\\sdk_job.vu3"
+        job = self.conn.create_job(
+            archive_path=archive_path,
+            job_name="sdk_job2",
+            priority="cpu-low",
+            software="3dsmax",
+            software_version="2023",
+            renderer_name="Corona",
+        ).create()
+        assert job.status_code == 200
+
+    def test_submit_3dsmx_job(self):
+        archive_path = "C:\\Users\\sdk_job.vu3"
+        job = self.conn.create_job(
+            archive_path=archive_path,
+            job_name="sdk_job",
+            priority="cpu-low",
+            software="3dsmax",
+            software_version="2023",
+            renderer_name="Corona",
+        )
+        res = self.conn.submit(job)
+        assert res == True
+
     def test_submit_job(self):
         archive_path = "C:\\Users\\mohbakh\\Pictures\\car\\sdk.vuc"
         job = self.conn.create_job(
@@ -106,3 +131,7 @@ class TestConnection:
     def test_get_renderer_id(self):
         renderer_id = self.conn.get_renderer_id("cinema4d", "R23", "Arnold")
         assert renderer_id == 443
+
+    def test_get_3dsmax_renderer_id(self):
+        renderer_id = self.conn.get_renderer_id("3dsmax", "2023", "Corona")
+        assert renderer_id == 550
