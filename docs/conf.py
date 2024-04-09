@@ -8,13 +8,14 @@
 
 import os
 import sys
+from ranch.__version__ import __version__
 
 sys.path.insert(0, os.path.abspath(".."))
 
 project = "Ranch SDK"
-copyright = "2023, ranchcomputing"
+copyright = "2024, ranchcomputing"
 author = "ranchcomputing"
-release = "1.0.0"
+release = __version__
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

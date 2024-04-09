@@ -1,5 +1,5 @@
 
-RANCH SDK documentation
+RANCH SDK Documentation
 ====================
 
 You use the RANCH SDK for Python (ranch-sdk) to create, and manage your jobs in or render farm.
