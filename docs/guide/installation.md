@@ -4,7 +4,7 @@ Set up a Python virtual environment.
 
 ```bash
 pip3 install virtualenv
-python3 -m venv env
+python3 -m venv venv
 ```
 
 Activate your virtual environment

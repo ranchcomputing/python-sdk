@@ -1,20 +1,34 @@
 # Basic usage
 
-## Configuration file
 
+## Example python script
 
-A basic usage of the Ranch require a configuration file (eg: `ranch.conf`).
-Here is a basic one, check `ranch.connection.` for details.
+### - Submit project with 3ds max
 
-```bash
-[client]
-token=token
+Here is a little simple script with python submit a job to the ranchcomputing render farm with 3ds max and Corona renderer 
+
+```python
+import os
+from ranch.connection import Connect
+
+RANCH_API_KEY = os.getenv("RANCH_API_KEY")
+
+conn = Connect(RANCH_API_KEY)
+
+job = conn.create_job(
+            archive_path="C:\\Users\\sdk_job.vu3",
+            job_name="sdk_job",
+            priority="cpu-low",
+            software="3dsmax",
+            software_version="2023",
+            renderer_name="Corona",
+        )
+res = conn.submit(job)
 ```
 
-### Python Script
+### - Submit project with cinema 4d
 
-
-And here is a little sample Python script to start a job in ranch rander farm.
+Here is a little simple script with python submit a job to the ranchcomputing render farm with cinema 4d R23 and Arnold renderer 
 
 ```python
 import os
@@ -34,7 +48,7 @@ vuc_archive_path = ranch_rc.create_archive(software_commandline=c4d_commandline,
             g_licenseUsername=Username, 
             g_licensePassword=Password, 
             scene_destination=scene)
-job = self.conn.create_job(
+job = conn.create_job(
             archive_path=vuc_archive_path,
             job_name="sdk_job",
             priority="cpu-low",
@@ -42,5 +56,7 @@ job = self.conn.create_job(
             software_version="R23",
             renderer_name="Arnold",
         )
-res = self.conn.submit(job)
+res = conn.submit(job)
+
 ```
+
